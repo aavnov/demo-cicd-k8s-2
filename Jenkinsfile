@@ -34,7 +34,7 @@ podTemplate(containers: [
                 sh 'du -a /etc/docker'
                 sh "docker system prune -f"
                 //dockerImage = docker.build imagename
-                dockerImage = docker.build("vasilvedev/demo-cicd-k8s-2-app:1.0","/home/jenkins/agent/workspace/my-345/demo-cicd-k8s-2")
+                dockerImage = docker.build("vasilvedev/demo-cicd-k8s-2-app:1.0","${env.WORKSPACE}/demo-cicd-k8s-2")
            
                 withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                    sh "echo \"${PASSWORD}\" | docker login -u ${USERNAME} --password-stdin"
