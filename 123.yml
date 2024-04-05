@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-cicd-k8s
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-cicd-k8s-app
+      version: blue
+  template:
+    metadata:
+      name: demo-cicd-k8s-pod
+      labels:
+        app: demo-cicd-k8s-app
+        version: blue
+    spec:
+      containers:
+      - name: demo-cicd-k8s-container
+        image: 192.168.1.39:5000/demo-cicd-k8s-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+      imagePullSecrets:
+      - name: regcred   
