@@ -23,7 +23,7 @@ podTemplate(containers: [
     
         stage('Package'){
             sh "git clone https://github.com/aavnov/demo-cicd-k8s-2"
-            sh "ls ~/agent/workspace/my-345/demo-cicd-k8s-2"
+            sh "ls ~/agent/workspace/my-345_main/demo-cicd-k8s-2"
             sh "find demo-cicd-k8s-2"
             container('maven') {
                 sh "mvn clean package -f ${env.WORKSPACE}/demo-cicd-k8s-2/pom.xml"
