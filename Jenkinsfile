@@ -40,7 +40,7 @@ podTemplate(containers: [
             container('kubectl') {
                 sh 'kubectl version'
                 sh 'du -a'
-                //sh 'kubectl apply  -f ./demo-cicd-k8s.yml'
+                sh 'kubectl apply  -f ./demo-cicd-k8s-2/demo-cicd-k8s.yml'
             }
             //kubernetesDeploy configs: 'demo-cicd-k8s-2/demo-cicd-k8s-2.yml', kubeconfigId: 'MyKubeConfig'
         }
