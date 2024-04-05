@@ -11,7 +11,7 @@ podTemplate(containers: [
 {
     node(POD_LABEL) {
     def dockerImage
-    def imagename = 'vasilvedev/demo-cicd-k8s-2-app:1.0'
+    //def imagename = 'vasilvedev/demo-cicd-k8s-2-app:1.0'
     
         stage('Package'){
             sh "git clone https://github.com/aavnov/demo-cicd-k8s-2"
@@ -24,9 +24,9 @@ podTemplate(containers: [
         stage('Build image'){
             container('docker') {
                 sh 'du -a /etc/docker'
-                //sh "docker system prune -f"
-                dockerImage = docker.build imagename
-                //dockerImage = docker.build("vasilvedev/demo-cicd-k8s-2-app:1.0","/home/jenkins/agent/workspace/my-345/demo-cicd-k8s-2")
+                sh "docker system prune -f"
+                //dockerImage = docker.build imagename
+                dockerImage = docker.build("vasilvedev/demo-cicd-k8s-2-app:1.0","/home/jenkins/agent/workspace/my-345/demo-cicd-k8s-2")
            
                 withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                    sh "echo \"${PASSWORD}\" | docker login -u ${USERNAME} --password-stdin"
