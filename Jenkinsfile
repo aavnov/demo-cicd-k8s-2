@@ -16,7 +16,7 @@ podTemplate(containers: [
             sh "ls ~/agent/workspace/my-345/demo-cicd-k8s-2"
             sh "find demo-cicd-k8s-2"
             container('maven') {
-                sh "mvn clean package -f ${env.WORKSPACE}/my-345/demo-cicd-k8s-2/pom.xml"
+                sh "mvn clean package -f ${env.WORKSPACE}/demo-cicd-k8s-2/pom.xml"
             }
         }
         stage('Build image'){
