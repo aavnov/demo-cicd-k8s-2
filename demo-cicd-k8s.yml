@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: demo-cicd-k8s-container
-        image: vasilvedev/demo-cicd-k8s-2-app:1.0
+        image: vasilvedev/demo-cicd-k8s-app:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8090

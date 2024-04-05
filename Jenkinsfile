@@ -30,7 +30,7 @@ podTemplate(containers: [
            
                 withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                    sh "echo \"${PASSWORD}\" | docker login -u ${USERNAME} --password-stdin"
-                   //dockerImage.push()
+                   dockerImage.push()
                 }
            }
         }
@@ -42,7 +42,6 @@ podTemplate(containers: [
                 sh 'du -a'
                 sh 'kubectl apply  -f ./demo-cicd-k8s-2/demo-cicd-k8s.yml'
             }
-            //kubernetesDeploy configs: 'demo-cicd-k8s-2/demo-cicd-k8s-2.yml', kubeconfigId: 'MyKubeConfig'
         }
    }
 }
