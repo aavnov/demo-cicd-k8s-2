@@ -1,3 +1,11 @@
+//Для привязки kubectl к окружению необходимо на хосте запустить:
+
+// kubectl create clusterrolebinding serviceaccounts-cluster-admin \
+//   --clusterrole=cluster-admin \
+//   --group=system:serviceaccounts
+
+
+
 podTemplate(containers: [
   containerTemplate(name: 'maven', image: 'maven:3.6.3-adoptopenjdk-11-openj9', ttyEnabled: true, command: 'cat'),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
