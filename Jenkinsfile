@@ -13,17 +13,17 @@ podTemplate(containers: [
     def dockerImage
     
         stage('Package'){
-        sh "git clone https://github.com/MarcoGhise/demo-cicd-k8s"
-        sh "ls ~/agent/workspace/my-234/demo-cicd-k8s"
-        sh "find demo-cicd-k8s"
+        sh "git clone https://github.com/MarcoGhise/demo-cicd-k8s-2"
+        sh "ls ~/agent/workspace/my-345/demo-cicd-k8s-2"
+        sh "find demo-cicd-k8s-2"
         container('maven') {
-            sh "mvn clean package -f /home/jenkins/agent/workspace/my-234/demo-cicd-k8s/pom.xml"
+            sh "mvn clean package -f /home/jenkins/agent/workspace/my-345/demo-cicd-k8s-2/pom.xml"
         }
         stage('Build image'){
         container('docker') {
         sh 'du -a /etc/docker' 
         sh "docker system prune -f"    
-        dockerImage = docker.build("vasilvedev/demo-cicd-k8s-app:1.0","/home/jenkins/agent/workspace/my-234/demo-cicd-k8s")
+        dockerImage = docker.build("vasilvedev/demo-cicd-k8s-2-app:1.0","/home/jenkins/agent/workspace/my-345/demo-cicd-k8s-2")
            
         withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) 
         { 
@@ -36,7 +36,7 @@ podTemplate(containers: [
     
     
     stage('Deploy'){
-      kubernetesDeploy configs: 'demo-cicd-k8s/demo-cicd-k8s.yml', kubeconfigId: 'MyKubeConfig'
+      kubernetesDeploy configs: 'demo-cicd-k8s-2/demo-cicd-k8s-2.yml', kubeconfigId: 'MyKubeConfig'
     }
   }
 }
