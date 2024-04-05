@@ -1,6 +1,7 @@
 podTemplate(containers: [
   containerTemplate(name: 'maven', image: 'maven:3.6.3-adoptopenjdk-11-openj9', ttyEnabled: true, command: 'cat'),
-  containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)
+  containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.14.0', command: 'cat', ttyEnabled: true)
   ],
   volumes: [
       hostPathVolume(hostPath: '/var/snap/docker/2746/config/daemon.json', mountPath: '/etc/docker/daemon.json'),
@@ -34,7 +35,10 @@ podTemplate(containers: [
     
     
         stage('Deploy'){
-            kubernetesDeploy configs: 'demo-cicd-k8s-2/demo-cicd-k8s-2.yml', kubeconfigId: 'MyKubeConfig'
+            container('kubectl') {
+                sh 'kubectl version'
+            }
+            //kubernetesDeploy configs: 'demo-cicd-k8s-2/demo-cicd-k8s-2.yml', kubeconfigId: 'MyKubeConfig'
         }
    }
 }
