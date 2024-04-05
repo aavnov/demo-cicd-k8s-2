@@ -39,7 +39,6 @@ podTemplate(containers: [
         stage('Deploy'){
             container('kubectl') {
                 sh 'kubectl version'
-                sh 'du -a'
                 sh 'kubectl apply  -f ./demo-cicd-k8s-2/demo-cicd-k8s.yml'
             }
         }
