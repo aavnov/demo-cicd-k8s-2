@@ -21,10 +21,10 @@ podTemplate(containers: [
     def dockerImage
     //def imagename = 'vasilvedev/demo-cicd-k8s-2-app:1.0'
     
-        stage('Package'){
+        stage('Clone repository & Build package'){
             sh "git clone https://github.com/aavnov/demo-cicd-k8s-2"
-            sh "ls ~/agent/workspace/my-345_main/demo-cicd-k8s-2"
-            sh "find demo-cicd-k8s-2"
+            //sh "ls ~/agent/workspace/my-345_main/demo-cicd-k8s-2"
+            //sh "find demo-cicd-k8s-2"
             container('maven') {
                 sh "mvn clean package -f ${env.WORKSPACE}/demo-cicd-k8s-2/pom.xml"
             }
